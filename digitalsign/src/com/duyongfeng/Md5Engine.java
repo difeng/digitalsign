@@ -1,16 +1,16 @@
 package com.duyongfeng;
 
 public class Md5Engine {
-	//½«ÒªÉú³ÉµÄÏûÏ¢ÕªÒª
+	//å°†è¦ç”Ÿæˆçš„æ¶ˆæ¯æ‘˜è¦
 	String msgDigest="";
-	//²ÎÓë¼ÆËãµÄ³£ÊıÊı×é
+	//å‚ä¸è®¡ç®—çš„å¸¸æ•°æ•°ç»„
 	int [] t=new int[64];
-	//ÓÃÓÚÉú³ÉÏûÏ¢ÕªÒªµÄÊ®Áù½øÖÆ×Ö·û´®
+	//ç”¨äºç”Ÿæˆæ¶ˆæ¯æ‘˜è¦çš„åå…­è¿›åˆ¶å­—ç¬¦ä¸²
 	String hex_chr = "0123456789abcdef";
 	public Md5Engine(){
 		initEngine();
 	}
-	//½«32Î»ÕûÊı°´µÍ×Ö½ÚÔÚ¸ßÎ»µÄĞÎÊ½×ª»»ÎªÊ®Áù½øÖÆ×Ö·û´®
+	//å°†32ä½æ•´æ•°æŒ‰ä½å­—èŠ‚åœ¨é«˜ä½çš„å½¢å¼è½¬æ¢ä¸ºåå…­è¿›åˆ¶å­—ç¬¦ä¸²
 	private String changeTohex(int num) {
 	        String str = "";
 	        for (int j = 0; j <= 3; j++)
@@ -18,9 +18,9 @@ public class Md5Engine {
 	                  hex_chr.charAt((num >> (j * 8)) & 0x0F);
 	        return str;
 	}
-	//³õÊ¼»¯²Ù×÷
+	//åˆå§‹åŒ–æ“ä½œ
 	public void initEngine(){
-		//³õÊ¼»¯tÊı×é
+		//åˆå§‹åŒ–tæ•°ç»„
 		double factor=4294967296.0;
 		for(int s=0;s<64;s++){
 			long r=(long) (factor*Math.abs(Math.sin(s+1)));
@@ -30,27 +30,27 @@ public class Md5Engine {
 		}
 	}
     public void computeDigest(byte[] msgBytes){
-    	//ÏûÏ¢µÄ×Ö½ÚÊı
+    	//æ¶ˆæ¯çš„å­—èŠ‚æ•°
 		int len=msgBytes.length;
-		//Ìî³äÊı×é
+		//å¡«å……æ•°ç»„
 		byte [] fillArr=null;
-		//ÏûÏ¢³¤¶ÈÕıºÃÊÇ512Î»µÄÕûÊı±¶
+		//æ¶ˆæ¯é•¿åº¦æ­£å¥½æ˜¯512ä½çš„æ•´æ•°å€
 		if((len%64)==0){
 			fillArr=new byte[56+8];
 		}else{
-			//ÏûÏ¢³¤¶ÈÄ£64µÄÓàÊı
+			//æ¶ˆæ¯é•¿åº¦æ¨¡64çš„ä½™æ•°
 			int r=len%64;
-			//ÏûÏ¢³¤¶ÈÄ£ÓàĞ¡ÓÚ56×Ö½ÚÊ±Ìî³äÊ¹Æä³¤¶È´ïµ½56×Ö½Ú
+			//æ¶ˆæ¯é•¿åº¦æ¨¡ä½™å°äº56å­—èŠ‚æ—¶å¡«å……ä½¿å…¶é•¿åº¦è¾¾åˆ°56å­—èŠ‚
 			if(r<56){
 				fillArr=new byte[56-r+8];
-				//ÏûÏ¢³¤¶È¸ÕºÃÂú×ãÒªÇóÄ£64Óà56
+				//æ¶ˆæ¯é•¿åº¦åˆšå¥½æ»¡è¶³è¦æ±‚æ¨¡64ä½™56
 			}else if(r==56){
 				fillArr=new byte[64+8];
 			}else{
 				fillArr=new byte[56+64-r+8];
 			}
 		}
-		//Ìî³äÏûÏ¢Êı×é
+		//å¡«å……æ¶ˆæ¯æ•°ç»„
 		if(fillArr!=null){
 			for(int i=0;i<fillArr.length-8;i++){
 				if(i==0){
@@ -58,17 +58,17 @@ public class Md5Engine {
 				}
 			}
 		}
-		//Ìí¼ÓÏûÏ¢³¤¶È
+		//æ·»åŠ æ¶ˆæ¯é•¿åº¦
 		long flen=msgBytes.length*8;
 		for(int i=fillArr.length-8;i<fillArr.length;i++){
 			fillArr[i]=(byte) (flen&0xff);
 			flen>>>=8;
 		}
-		//Ìî³äºóµÄ×îÖÕÏûÏ¢×Ö½ÚÊı×é
+		//å¡«å……åçš„æœ€ç»ˆæ¶ˆæ¯å­—èŠ‚æ•°ç»„
 		byte[] afterFillMsg=new byte[fillArr.length+msgBytes.length];
-		//½«Ìî³äÊı×éÓëÔ­ÏûÏ¢Êı×éºÏ²¢
+		//å°†å¡«å……æ•°ç»„ä¸åŸæ¶ˆæ¯æ•°ç»„åˆå¹¶
 		mergeTwoArr(fillArr,msgBytes,afterFillMsg);
-	    //½«Ìî³äºóµÄ×îÖÕÏûÏ¢×Ö½ÚÊı×éÓÃÕûĞÎÊı×é±íÊ¾
+	    //å°†å¡«å……åçš„æœ€ç»ˆæ¶ˆæ¯å­—èŠ‚æ•°ç»„ç”¨æ•´å½¢æ•°ç»„è¡¨ç¤º
 		int [] arr=new int[afterFillMsg.length/4];
 		for(int i=0;i<arr.length;i++){
 			int t1=afterFillMsg[i*4]&0xff;
@@ -80,23 +80,23 @@ public class Md5Engine {
 			t1|=t4<<24&0xff000000;
 			arr[i]=t1;
 		}
-		//³õÊ¼»¯±äÁ¿
+		//åˆå§‹åŒ–å˜é‡
 		int a=0x67452301;
 		int b=0xefcdab89;
 		int c=0x98badcfe;
 		int d=0x10325476;
 		for(int i=0;i<arr.length/16;i++){
 			int[] x=new int[16];
-			//Ã¿Ñ­»·Ò»´Î£¬°ÑÔ­ÎÄ´æ·ÅÔÚ16¸öÔªËØµÄÊı×éxÖĞ
+			//æ¯å¾ªç¯ä¸€æ¬¡ï¼ŒæŠŠåŸæ–‡å­˜æ”¾åœ¨16ä¸ªå…ƒç´ çš„æ•°ç»„xä¸­
 			for(int j=0;j<16;j++){
 				x[j]=arr[i*16+j];
 			}
-			//½«a±£´æÎªaa£¬b±£´æÎªbb£¬c±£´æÎªcc£¬d±£´æÎªdd
+			//å°†aä¿å­˜ä¸ºaaï¼Œbä¿å­˜ä¸ºbbï¼Œcä¿å­˜ä¸ºccï¼Œdä¿å­˜ä¸ºdd
 			int aa=a;
 			int bb=b;
 			int cc=c;
 			int dd=d;
-			//µÚÒ»ÂÖ²Ù×÷
+			//ç¬¬ä¸€è½®æ“ä½œ
 			a=ff(a,b,c,d,x[0],7,t[0]);
 			d=ff(d,a,b,c,x[1],12,t[1]);
 			c=ff(c,d,a,b,x[2],17,t[2]);
@@ -113,7 +113,7 @@ public class Md5Engine {
 			d=ff(d,a,b,c,x[13],12,t[13]);
 			c=ff(c,d,a,b,x[14],17,t[14]);
 			b=ff(b,c,d,a,x[15],22,t[15]);
-			//µÚ¶şÂÖ²Ù×÷
+			//ç¬¬äºŒè½®æ“ä½œ
 			a=gg(a,b,c,d,x[1],5,t[16]);
 			d=gg(d,a,b,c,x[6],9,t[17]);
 			c=gg(c,d,a,b,x[11],14,t[18]);
@@ -130,7 +130,7 @@ public class Md5Engine {
 			d=gg(d,a,b,c,x[2],9,t[29]);
 			c=gg(c,d,a,b,x[7],14,t[30]);
 			b=gg(b,c,d,a,x[12],20,t[31]);
-			//µÚÈıÂÖ²Ù×÷
+			//ç¬¬ä¸‰è½®æ“ä½œ
 			a=hh(a,b,c,d,x[5],4,t[32]);
 			d=hh(d,a,b,c,x[8],11,t[33]);
 			c=hh(c,d,a,b,x[11],16,t[34]);
@@ -147,7 +147,7 @@ public class Md5Engine {
 			d=hh(d,a,b,c,x[12],11,t[45]);
 			c=hh(c,d,a,b,x[15],16,t[46]);
 			b=hh(b,c,d,a,x[2],23,t[47]);
-			//µÚËÄÂÖ²Ù×÷
+			//ç¬¬å››è½®æ“ä½œ
 			a=ii(a,b,c,d,x[0],6,t[48]);
 			d=ii(d,a,b,c,x[7],10,t[49]);
 			c=ii(c,d,a,b,x[14],15,t[50]);
@@ -164,7 +164,7 @@ public class Md5Engine {
 			d=ii(d,a,b,c,x[11],10,t[61]);
 			c=ii(c,d,a,b,x[2],15,t[62]);
 			b=ii(b,c,d,a,x[9],21,t[63]);
-			//È»ºó½øĞĞÈçÏÂ²Ù×÷
+			//ç„¶åè¿›è¡Œå¦‚ä¸‹æ“ä½œ
 			a=a+aa;
 			b=b+bb;
 			c=c+cc;
@@ -173,7 +173,7 @@ public class Md5Engine {
 		msgDigest=changeTohex(a)+changeTohex(b)+changeTohex(c)+changeTohex(d);
     }
     public void mergeTwoArr(byte[] fillArr,byte[] msgBytes,byte[] afterFillMsg){
-    	//½«Ìî³äÊı×éÓëÔ­ÏûÏ¢Êı×éºÏ²¢
+    	//å°†å¡«å……æ•°ç»„ä¸åŸæ¶ˆæ¯æ•°ç»„åˆå¹¶
 		int k=0;
 		while(k<afterFillMsg.length){
 			if(k<msgBytes.length){
@@ -184,7 +184,7 @@ public class Md5Engine {
 			k++;
 		}
     }
-	//¶¨ÒåËÄ¸öMD5»ù±¾µÄ°´Î»²Ù×÷º¯Êı
+	//å®šä¹‰å››ä¸ªMD5åŸºæœ¬çš„æŒ‰ä½æ“ä½œå‡½æ•°
 	public int mf(int x,int y,int z){
 		return (x&y)|((~x)&z);
 	}
@@ -197,7 +197,7 @@ public class Md5Engine {
 	public int mi(int x,int y,int z){
 		return y^(x|(~z));
 	}
-	//¶¨ÒåËÄ¸ö·Ö±ğÓÃÓÚ±ä»»µÄº¯Êı
+	//å®šä¹‰å››ä¸ªåˆ†åˆ«ç”¨äºå˜æ¢çš„å‡½æ•°
 	public int ff(int a,int b,int c,int d,int mj,int s,int ti){
 		return  (b+((a+mf(b,c,d)+mj+ti)<<s|(a+mf(b,c,d)+mj+ti)>>>(32-s)));
 	}

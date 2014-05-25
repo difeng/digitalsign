@@ -4,14 +4,14 @@ import java.security.SecureRandom;
 
 public class RsaEngine {
 	private final static SecureRandom rand=new SecureRandom();
-    //pÓëqÎªÁ½¸ö´óËØÊı
+    //pä¸qä¸ºä¸¤ä¸ªå¤§ç´ æ•°
 	private BigInteger p;
 	private BigInteger q;
-	//¹«Ô¿Ä£Êı
+	//å…¬é’¥æ¨¡æ•°
 	private BigInteger n;
-	//¹«Ô¿
+	//å…¬é’¥
 	private BigInteger e;
-	//Ë½Ô¿
+	//ç§é’¥
 	private BigInteger d;
 	public BigInteger getN() {
 		return n;
@@ -24,25 +24,25 @@ public class RsaEngine {
 	}
 	public RsaEngine(){
 	}
-	//²úÉú³¤¶ÈÎªNÎ»µÄ¹«Ô¿ºÍË½Ô¿
+	//äº§ç”Ÿé•¿åº¦ä¸ºNä½çš„å…¬é’¥å’Œç§é’¥
 	public void produceKey(int N){
-		//²úÉúÁ½¸öN/2Î»µÄ´óËØÊıpºÍq
+		//äº§ç”Ÿä¸¤ä¸ªN/2ä½çš„å¤§ç´ æ•°på’Œq
 		p=BigInteger.probablePrime(N/2,rand);
 		q=BigInteger.probablePrime(N/2,rand);
-		//¼ÆËã(p-1)*(q-1)
+		//è®¡ç®—(p-1)*(q-1)
 		BigInteger eulerFun=(p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
-		//¼ÆËãÄ£Êıp*q
+		//è®¡ç®—æ¨¡æ•°p*q
 		n=p.multiply(q);
-		//Ñ¡È¡ºÏÊÊµÄ¹«Ô¿
+		//é€‰å–åˆé€‚çš„å…¬é’¥
 		e=new BigInteger("65537");
-		//¼ÆËã³öË½Ô¿d£¬¼´eµÄÄ£nµÄÄæ
+		//è®¡ç®—å‡ºç§é’¥dï¼Œå³eçš„æ¨¡nçš„é€†
 		d=e.modInverse(eulerFun);
 	}
-	//¼ÓÃÜ²Ù×÷
+	//åŠ å¯†æ“ä½œ
 	public byte[] encrypt(BigInteger e,BigInteger n,byte [] msgBytes){
 		return new BigInteger(msgBytes).modPow(e,n).toByteArray();
 	}
-	//½âÃÜ²Ù×÷
+	//è§£å¯†æ“ä½œ
 	public byte[] decrypt(BigInteger d,BigInteger n,byte [] Ciphertext){
 		return new BigInteger(Ciphertext).modPow(d,n).toByteArray();
 	}

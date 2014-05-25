@@ -10,9 +10,9 @@ public class MainFrame extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//º¬ÓĞÈı¸öÑ¡Ïî¿¨µÄpanel
+	//å«æœ‰ä¸‰ä¸ªé€‰é¡¹å¡çš„panel
 	MainPane mainPane=new MainPane();
-	//·Å±êÌâÍ¼Æ¬µÄpanel
+	//æ”¾æ ‡é¢˜å›¾ç‰‡çš„panel
 	TitlePane titlePane=new TitlePane();
 	public MainFrame() throws HeadlessException {
 		setSize(500,520);
@@ -24,12 +24,12 @@ public class MainFrame extends JFrame{
 		p.add(mainPane);
 		add(p);
 		JSplitPane jsp1 = new JSplitPane(0,titlePane,mainPane);
-		jsp1.setDividerLocation(100);//À¨ºÅÀïÌî·Ö¸îÏßÎ»ÖÃ
+		jsp1.setDividerLocation(100);//æ‹¬å·é‡Œå¡«åˆ†å‰²çº¿ä½ç½®
 		jsp1.setEnabled(false);
 		add(jsp1);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Êı×ÖÇ©Ãû");
+		setTitle("æ•°å­—ç­¾å");
 		setVisible(true);
 	}
 	public static void main(String[] args) {

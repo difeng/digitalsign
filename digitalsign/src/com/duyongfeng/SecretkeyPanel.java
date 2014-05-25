@@ -16,20 +16,20 @@ public class SecretkeyPanel extends JPanel implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//»ñÈ¡ÃÜÔ¿µÄ°´Å¥
+	//è·å–å¯†é’¥çš„æŒ‰é’®
 	private JButton proKeyBtn;
-	//Ë½Ô¿
+	//ç§é’¥
 	private JTextArea prKeyArea;
-	//¹«Ô¿
+	//å…¬é’¥
 	private JTextArea puKeyArea; 
-	//±£´æÃÜÔ¿µÄ°´Å¥
+	//ä¿å­˜å¯†é’¥çš„æŒ‰é’®
 	private JButton saveKeyBtn;
-	//»ùÓÚRSAµÄÃÜÔ¿Éú³ÉÆ÷
+	//åŸºäºRSAçš„å¯†é’¥ç”Ÿæˆå™¨
 	RsaEngine rsaEngine=new RsaEngine();
 	public SecretkeyPanel(){
 		setLayout(null);
-		proKeyBtn=new JButton("»ñÈ¡ÃÜÔ¿");
-		saveKeyBtn=new JButton("±£´æÃÜÔ¿");
+		proKeyBtn=new JButton("è·å–å¯†é’¥");
+		saveKeyBtn=new JButton("ä¿å­˜å¯†é’¥");
 		prKeyArea=new JTextArea();
 		puKeyArea=new JTextArea();
 		prKeyArea.setLineWrap(true);
@@ -38,8 +38,8 @@ public class SecretkeyPanel extends JPanel implements ActionListener{
 		srp1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		JScrollPane srp2=new JScrollPane(puKeyArea);
 		srp2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		JLabel jlt1=new JLabel("Ë½Ô¿:");
-		JLabel jlt2=new JLabel("¹«Ô¿:");
+		JLabel jlt1=new JLabel("ç§é’¥:");
+		JLabel jlt2=new JLabel("å…¬é’¥:");
 		jlt1.setBounds(20,30,30,20);
 		srp1.setBounds(50,30,300,120);
 		jlt2.setBounds(20,160,30,20);
@@ -67,7 +67,7 @@ public class SecretkeyPanel extends JPanel implements ActionListener{
 			//JavaFileFilter javaFilter = new JavaFileFilter();
 			chooser.addChoosableFileFilter(txtFilter);
 			//chooser.addChoosableFileFilter(javaFilter);
-			// ÉèÖÃÄ¬ÈÏµÄÎÄ¼ş¹ÜÀíÆ÷¡£Èç¹û²»ÉèÖÃ,Ôò×îºóÌí¼ÓµÄÎÄ¼ş¹ıÂËÆ÷ÎªÄ¬ÈÏ¹ıÂËÆ÷,±¾ÀıÖĞÎªjavaFilter
+			// è®¾ç½®é»˜è®¤çš„æ–‡ä»¶ç®¡ç†å™¨ã€‚å¦‚æœä¸è®¾ç½®,åˆ™æœ€åæ·»åŠ çš„æ–‡ä»¶è¿‡æ»¤å™¨ä¸ºé»˜è®¤è¿‡æ»¤å™¨,æœ¬ä¾‹ä¸­ä¸ºjavaFilter
 			chooser.setFileFilter(txtFilter);
 			int rs = chooser.showSaveDialog(this); 
 			if(rs==JFileChooser.APPROVE_OPTION){
@@ -90,11 +90,11 @@ public class SecretkeyPanel extends JPanel implements ActionListener{
 		}
 	}
 }
-//ÎÄ¼ş¹ıÂËÆ÷
+//æ–‡ä»¶è¿‡æ»¤å™¨
 class TxtFileFilter extends FileFilter {
 
 	public String getDescription() {
-		return "*.txt(ÎÄ±¾ÎÄ¼ş)";
+		return "*.txt(æ–‡æœ¬æ–‡ä»¶)";
 	}
 	public boolean accept(File file) {
 		String name = file.getName();

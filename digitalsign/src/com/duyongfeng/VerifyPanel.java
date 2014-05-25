@@ -25,22 +25,22 @@ public class VerifyPanel extends JPanel implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton choseBtn;
-	//ÊäÈëÎÄ¼şÂ·¾¶µÄÊäÈë¿ò
+	//è¾“å…¥æ–‡ä»¶è·¯å¾„çš„è¾“å…¥æ¡†
 	private JTextField fileField;
-	//ÑéÖ¤Ç©ÃûµÄ°´Å¥
+	//éªŒè¯ç­¾åçš„æŒ‰é’®
 	private JButton verifyBtn;
-	//¹«Ô¿
+	//å…¬é’¥
 	private JTextArea puKeyArea; 
-	//ÑÚ¸ÇĞÅÏ¢
+	//æ©ç›–ä¿¡æ¯
 	private JTextArea coversArea; 
-	//ÊÇ·ñÑÚ¸ÇµÄÏÂÀ­ÁĞ±í
+	//æ˜¯å¦æ©ç›–çš„ä¸‹æ‹‰åˆ—è¡¨
 	private JComboBox isCoverJcombox;
 	private JLabel verifyState;
 	public VerifyPanel(){
-		choseBtn=new JButton("Ñ¡ÔñÎÄ¼ş");
+		choseBtn=new JButton("é€‰æ‹©æ–‡ä»¶");
 		fileField=new JTextField();
-		verifyBtn=new JButton("ÑéÖ¤Ç©Ãû");
-		JLabel jlt1=new JLabel("ÑéÖ¤ÎÄ¼ş:");
+		verifyBtn=new JButton("éªŒè¯ç­¾å");
+		JLabel jlt1=new JLabel("éªŒè¯æ–‡ä»¶:");
 		puKeyArea=new JTextArea();
 		puKeyArea.setLineWrap(true);
 		JScrollPane srp2=new JScrollPane(puKeyArea);
@@ -49,14 +49,14 @@ public class VerifyPanel extends JPanel implements ActionListener{
 		coversArea.setLineWrap(true);
 		JScrollPane srp3=new JScrollPane(coversArea);
 		srp3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		String[] data = {"ÊÇ", "·ñ"};
+		String[] data = {"æ˜¯", "å¦"};
 		isCoverJcombox=new JComboBox(data);
-		JLabel jlt3=new JLabel("¶Ô·½¹«Ô¿:");
-		JLabel jlt4=new JLabel("ÑéÖ¤×´Ì¬:");
-		JLabel jlt5=new JLabel("ÊÇ·ñÑÚ¸Ç:");
-		JLabel jlt6=new JLabel("ÑÚ¸ÇĞÅÏ¢:");
+		JLabel jlt3=new JLabel("å¯¹æ–¹å…¬é’¥:");
+		JLabel jlt4=new JLabel("éªŒè¯çŠ¶æ€:");
+		JLabel jlt5=new JLabel("æ˜¯å¦æ©ç›–:");
+		JLabel jlt6=new JLabel("æ©ç›–ä¿¡æ¯:");
 		verifyState=new JLabel("");
-		verifyState.setFont(new Font("»ªÎÄĞĞ¿¬",5,18));
+		verifyState.setFont(new Font("åæ–‡è¡Œæ¥·",5,18));
 		verifyState.setForeground(Color.BLUE);
 		setLayout(null);
 		jlt1.setBounds(20,50,80,20);
@@ -103,49 +103,49 @@ public class VerifyPanel extends JPanel implements ActionListener{
 			}
 			fileField.setEnabled(false);
 		}else if(e.getSource()==verifyBtn){
-			//»ñÈ¡ÒªÇ©ÃûµÄÎÄ¼şµÄµØÖ·
+			//è·å–è¦ç­¾åçš„æ–‡ä»¶çš„åœ°å€
 			String fileStr=fileField.getText().trim();
 			if(fileStr==null || "".equals(fileStr)){
-				JOptionPane.showMessageDialog(this,"ÇëÑ¡ÔñÎÄ¼ş");
+				JOptionPane.showMessageDialog(this,"è¯·é€‰æ‹©æ–‡ä»¶");
 				return;
 			}
 			String puKeyStr=puKeyArea.getText().trim();
 			String codeStr=coversArea.getText().trim();
 			if(isCoverJcombox.getSelectedIndex()==0){
 				if(puKeyStr==null||"".equals(puKeyStr)||codeStr==null||"".equals(codeStr)){
-					JOptionPane.showMessageDialog(this,"¹«Ô¿ºÍÑÚÂë²»ÄÜÎª¿Õ£¡\nÇëÊäÈë¹«Ô¿ºÍÃÜÂë£¡");
+					JOptionPane.showMessageDialog(this,"å…¬é’¥å’Œæ©ç ä¸èƒ½ä¸ºç©ºï¼\nè¯·è¾“å…¥å…¬é’¥å’Œå¯†ç ï¼");
 					return;
 				}else{
 					if(!SignUtils.isNumeric(puKeyStr)||!SignUtils.isNumeric(codeStr)){
-						JOptionPane.showMessageDialog(this,"ÃÜÔ¿ºÍÑÚ¸ÇÂëÖĞ²»ÄÜº¬·ÇÊı×Ö×Ö·û\nÇëÕıÈ·ÊäÈë£¡");
+						JOptionPane.showMessageDialog(this,"å¯†é’¥å’Œæ©ç›–ç ä¸­ä¸èƒ½å«éæ•°å­—å­—ç¬¦\nè¯·æ­£ç¡®è¾“å…¥ï¼");
 						return;
 					}
 					File f=new File(fileStr);
-					//ÒªÑéÖ¤µÄÇ©ÃûÎÄ¼ş´æÔÚµÄ»°¶ÔÎÄ¼ş½øĞĞÇ©Ãû
+					//è¦éªŒè¯çš„ç­¾åæ–‡ä»¶å­˜åœ¨çš„è¯å¯¹æ–‡ä»¶è¿›è¡Œç­¾å
 					if(f.exists()){
 						verifySign(f,0);
-						//²»´æÔÚµÄ»°¾¯¸æ
+						//ä¸å­˜åœ¨çš„è¯è­¦å‘Š
 					}else{
-						JOptionPane.showMessageDialog(this,"ÒªÑéÖ¤µÄÎÄ¼ş²»´æÔÚ£¬ÇëÖØĞÂÑ¡Ôñ");
+						JOptionPane.showMessageDialog(this,"è¦éªŒè¯çš„æ–‡ä»¶ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°é€‰æ‹©");
 					}  	
 				}
 			}else{
-				//ÅĞ¶ÏÃÜÔ¿ÊÇ·ñÊäÈë
+				//åˆ¤æ–­å¯†é’¥æ˜¯å¦è¾“å…¥
 				if(puKeyStr==null||"".equals(puKeyStr)){
-			    	JOptionPane.showMessageDialog(this,"¹«Ô¿²»ÄÜÎª¿Õ£¡\nÇëÊäÈë¹«Ô¿£¡");
+			    	JOptionPane.showMessageDialog(this,"å…¬é’¥ä¸èƒ½ä¸ºç©ºï¼\nè¯·è¾“å…¥å…¬é’¥ï¼");
 					return;
 			    }else{
 			    	if(!SignUtils.isNumeric(puKeyStr)){
-						JOptionPane.showMessageDialog(this,"ÃÜÔ¿ÖĞ²»ÄÜº¬·ÇÊı×Ö×Ö·û\nÇëÕıÈ·ÊäÈë£¡");
+						JOptionPane.showMessageDialog(this,"å¯†é’¥ä¸­ä¸èƒ½å«éæ•°å­—å­—ç¬¦\nè¯·æ­£ç¡®è¾“å…¥ï¼");
 						return;
 					}
 			    	File f=new File(fileStr);
-			    	//ÒªÑéÖ¤µÄÇ©ÃûÎÄ¼ş´æÔÚµÄ»°¶ÔÎÄ¼ş½øĞĞÇ©Ãû
+			    	//è¦éªŒè¯çš„ç­¾åæ–‡ä»¶å­˜åœ¨çš„è¯å¯¹æ–‡ä»¶è¿›è¡Œç­¾å
 			    	if(f.exists()){
 			    		verifySign(f,1);
-			    		//²»´æÔÚµÄ»°¾¯¸æ
+			    		//ä¸å­˜åœ¨çš„è¯è­¦å‘Š
 			    	}else{
-			    		JOptionPane.showMessageDialog(this,"ÒªÑéÖ¤µÄÎÄ¼ş²»´æÔÚ£¬ÇëÖØĞÂÑ¡Ôñ");
+			    		JOptionPane.showMessageDialog(this,"è¦éªŒè¯çš„æ–‡ä»¶ä¸å­˜åœ¨ï¼Œè¯·é‡æ–°é€‰æ‹©");
 			    	}
 			    }
 			}
@@ -167,44 +167,44 @@ public class VerifyPanel extends JPanel implements ActionListener{
 		try {
 			FileInputStream in=new FileInputStream(f);
 			//FileOutputStream out=new FileOutputStream(f,true);
-			//»ñÈ¡Ç©¹ıÃûµÄÎÄ¼şµÄ×Ö½ÚÊı×é
+			//è·å–ç­¾è¿‡åçš„æ–‡ä»¶çš„å­—èŠ‚æ•°ç»„
 			byte[] msgBytes=new byte[(int) f.length()];
 			in.read(msgBytes);
 			in.close();
-			//´ÓÇ©ÃûµÄÎÄ¼şÖĞ·ÖÀë³öÀ´Ç©ÃûÇ°µÄÔ´ÎÄ¼ş
+			//ä»ç­¾åçš„æ–‡ä»¶ä¸­åˆ†ç¦»å‡ºæ¥ç­¾åå‰çš„æºæ–‡ä»¶
 			byte[] srcBytes=new byte[msgBytes.length-128];
 			for(int i=0;i<srcBytes.length;i++){
 				srcBytes[i]=msgBytes[i];
 			}
-			//´øĞÅÏ¢ÑÚ¸ÇµÄÇ©Ãû
+			//å¸¦ä¿¡æ¯æ©ç›–çš„ç­¾å
 			if(0==method){
 				String codeStr=coversArea.getText().trim();
 				srcBytes=preMd5Msg(srcBytes,codeStr);
 			}
-			//Éú³ÉÔ´ÎÄ¼şµÄÕªÒª
+			//ç”Ÿæˆæºæ–‡ä»¶çš„æ‘˜è¦
 			md5Engine.computeDigest(srcBytes);
 			String msgDigest=md5Engine.msgDigest;
-			//´ÓÇ©ÃûµÄÎÄ¼şÖĞ·ÖÀë³öÀ´Ç©¹ıÃûµÄÎÄ¼şÕªÒª
+			//ä»ç­¾åçš„æ–‡ä»¶ä¸­åˆ†ç¦»å‡ºæ¥ç­¾è¿‡åçš„æ–‡ä»¶æ‘˜è¦
 			byte[] summeryBytes=new byte[128];
 			for(int i=msgBytes.length-128,j=0;i<msgBytes.length;i++){
 				summeryBytes[j++]=msgBytes[i];
 			}
-			//¶ÔÇ©¹ıÃûµÄÎÄ¼şÕªÒª½øĞĞÑéÖ¤
+			//å¯¹ç­¾è¿‡åçš„æ–‡ä»¶æ‘˜è¦è¿›è¡ŒéªŒè¯
 			byte[] signBytes=rsaEngine.decrypt(pe,n,summeryBytes);
 			if(msgDigest.equals(new String(signBytes))){
-				verifyState.setText("Ç©ÃûÓĞĞ§!");
+				verifyState.setText("ç­¾åæœ‰æ•ˆ!");
 			}else{
-				verifyState.setText("Ç©ÃûÎŞĞ§!");
+				verifyState.setText("ç­¾åæ— æ•ˆ!");
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
     }
-    //¼ÆËãÏûÏ¢ºÍÒş²ØĞÅÏ¢µÄºÏ²¢ºóµÄ×Ö½ÚÊı×é
+    //è®¡ç®—æ¶ˆæ¯å’Œéšè—ä¿¡æ¯çš„åˆå¹¶åçš„å­—èŠ‚æ•°ç»„
     public byte[] preMd5Msg(byte [] msgBytes,String codeStr){
     	byte [] codeBytes=codeStr.getBytes();
     	byte [] newMsgBytes=new byte[codeBytes.length+msgBytes.length];
-    	//½«Ìî³äÊı×éÓëÔ­ÏûÏ¢Êı×éºÏ²¢
+    	//å°†å¡«å……æ•°ç»„ä¸åŸæ¶ˆæ¯æ•°ç»„åˆå¹¶
 		int i=0;
 		while(i<newMsgBytes.length){
 			if(i<codeBytes.length){

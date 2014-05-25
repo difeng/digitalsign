@@ -9,23 +9,23 @@ public class MainPane extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//·ÅÑ¡Ïî¿¨µÄpanel
+	//æ”¾é€‰é¡¹å¡çš„panel
 	JTabbedPane tabs;
-	//½øĞĞÊı×ÖÇ©ÃûµÄpanel
+	//è¿›è¡Œæ•°å­—ç­¾åçš„panel
 	SignPanel signPanel=new SignPanel();
-	//Ç©ÃûÑéÖ¤µÄpanel
+	//ç­¾åéªŒè¯çš„panel
 	VerifyPanel verifyPanel=new VerifyPanel();
-	//Éú³ÉÃÜÔ¿µÄpanel
+	//ç”Ÿæˆå¯†é’¥çš„panel
 	SecretkeyPanel secretkeyPanel=new SecretkeyPanel();
     MainPane() {
         setLayout(new BorderLayout(3,3));
         tabs = new JTabbedPane();
-        tabs.addTab("»ñÈ¡ÃÜÔ¿",secretkeyPanel);
-        tabs.addTab("Êı×ÖÇ©Ãû",signPanel);
-        tabs.addTab("ÑéÖ¤Ç©Ãû",verifyPanel);
+        tabs.addTab("è·å–å¯†é’¥",secretkeyPanel);
+        tabs.addTab("æ•°å­—ç­¾å",signPanel);
+        tabs.addTab("éªŒè¯ç­¾å",verifyPanel);
         add(BorderLayout.CENTER, tabs);
     }
-    //Ìí¼ÓÑ¡Ïî¿¨
+    //æ·»åŠ é€‰é¡¹å¡
     public Component addTab(String title, Component component) {
         return tabs.add(title, component);
     }
